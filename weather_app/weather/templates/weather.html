@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Weather App</h1>
+        <form method="get">
+            <div class="form-group">
+                <input type="text" name="city" class="form-control" placeholder="Enter a city">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        {% if city %}
+            <div class="card mt-3">
+                <div class="card-header">
+                    Weather for {{ city }}
+                </div>
+                <!-- <pre>{{ aaall | pprint }}</pre> -->
+                 {% for i in aaall %}
+                  <div class="card-body">
+                    <!-- <pre>{{ i.main | pprint }}</pre> -->
+                    <p>Date And Time: {{ i.dt_txt }} </p>
+                    <p>Temperature: {{ i.main.temp }} &deg;C</p>
+                    <p>Humidity: {{ i.main.humidity }}%</p>
+                    <p>Wind Speed: {{ i.wind.speed }} m/s</p>
+                    {% for w in i.weather %}
+                      <p>Weather Description: {{ w.description }} m/s</p>
+
+                    {% endfor %}
+                  </div>
+                {% endfor %}
+
+        
+            </div>
+        {% endif %}
+
+        {% if error %}
+NO City Found
+        {% endif %}
+    </div>
+{% endblock %}
